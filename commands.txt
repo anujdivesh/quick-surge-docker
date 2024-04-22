@@ -1,0 +1,43 @@
+sudo docker run -ti --rm dockermpi /bin/bash
+
+
+docker run -v /home/anuj/Desktop/partner:/anuj -ti --rm  dockermpi /bin/bash /anuj/test.sh
+
+
+docker run -v /media/judith/10TB/QuickSurge/Runs/Harold2020_SATO/ramp:/harold -v /media/judith/10TB/ADCIRC55/adcirc_v55.01SH:/model -ti dockermpi /bin/bash
+
+
+
+docker run -v /media:/media -ti --rm mpi /bin/bash 
+
+Id is 364070257
+pass is TuvMet@2023
+
+
+sudo docker run -v /model:/home/anuj/Desktop/partner/docker-mpi/adcirc_v55.01SH -v /output:/home/anuj/Desktop/partner/docker-mpi/Lola2023_VU2/ramp -ti --rm mpi /bin/bash -c "echo 'Hello world'; echo 'hello 2';"
+
+
+
+sudo docker run -v /home/anuj/Desktop/partner/docker-mpi/adcirc_v55.01SH:/model -v /home/anuj/Desktop/partner/docker-mpi/Lola2023_VU2/ramp:/output -ti --rm mpi /bin/bash -c "chmod +x -R /model; cd /output; /model/adcprep --np 3 --partmesh;"
+sudo docker run -v /home/anuj/Desktop/partner/docker-mpi/adcirc_v55.01SH:/model -v /home/anuj/Desktop/partner/docker-mpi/Lola2023_VU2/ramp:/output -ti --rm mpi /bin/bash -c "chmod +x -R /model; cd /output; /model/adcprep --np 3 --prepall;"
+sudo docker run -v /home/anuj/Desktop/partner/docker-mpi/adcirc_v55.01SH:/model -v /home/anuj/Desktop/partner/docker-mpi/Lola2023_VU2/ramp:/output -ti --rm mpi /bin/bash -c "chmod +x -R /model; cd /output; mpirun -np 3 /model/padcirc;"
+
+
+
+sudo docker run -v /home/anuj/Desktop/partner/docker-mpi/test/padcirc-model/models:/model -v /home/anuj/Desktop/partner/docker-mpi/Lola2023_VU2/ramp:/output -ti --rm padcirc-docker /bin/bash -c "chmod +x -R /model; cd /output; /model/adcprep --np 3 --partmesh;"
+sudo docker run -v /home/anuj/Desktop/partner/docker-mpi/test/padcirc-model/models:/model -v /home/anuj/Desktop/partner/docker-mpi/Lola2023_VU2/ramp:/output -ti --rm padcirc-docker /bin/bash -c "chmod +x -R /model; cd /output; /model/adcprep --np 3 --prepall;"
+sudo docker run -v /home/anuj/Desktop/partner/docker-mpi/test/padcirc-model/models:/model -v /home/anuj/Desktop/partner/docker-mpi/Lola2023_VU2/ramp:/output -ti --rm padcirc-docker /bin/bash -c "chmod +x -R /model; cd /output; mpirun -np 3 /model/padcirc;"
+
+
+docker build -t docker-mpi .
+
+docker create -p 8087:80 --name docker-mpi docker-mpi
+
+docker start docker-mpi
+
+docker exec -it docker-mpi bash
+
+
+docker run -v /media/judith/10TB/anuj/QuickSurge/docker-mpi/QuickSurge-docker/QuickSurge:/model -ti --rm docker-mpi /bin/bash -c ". /opt/miniconda/bin/activate; cd /model/Python_Codes; python main_IDA_PDNA_StormSurge.py"
+
+

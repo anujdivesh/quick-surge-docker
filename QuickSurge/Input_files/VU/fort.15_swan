@@ -1,0 +1,71 @@
+oceanmesh2d
+VU
+1        	 ! NFOVER 
+0        	 ! NABOUT 
+1800        	 ! NSCREEN 
+67        	 ! IHOT 
+2         	 ! ICS 
+511112          	 ! IM 
+1            	 ! NOLIBF 
+2            	 ! NOLIFA 
+1           	 ! NOLICA 
+1           	 ! NOLICAT 
+3          	 ! NWP 
+primitive_weighting_in_continuity_equation
+advection_state
+quadratic_friction_coefficient_at_sea_floor
+1   	 	 ! NCOR 
+1   	 	 ! NTIP 
+308   	 	 ! NWS 
+1    	 	 ! NRAMP 
+9.810000     ! G  
+-3   	 	 ! TAU0 
+2    	 	 ! DTDP 
+0  	 	     ! STATIM 
+0   	 	 ! REFTIM 
+YYYY MM DD HH   1 0.900000 1800                ! StormNumber,BLAdj
+DELTA_IN_DAYS                 	 	          ! RNDAY - TOTAL LENGTH OF SIMULATION (IN DAYS)11.25 
+3   	 	  ! DRAMP 
+0 1 0   	  ! A00, B00, C00 
+0.1 0 0 0.01    	 ! H0, 2*dummy, VELMIN 
+168.041701 -16.357888 	 	 ! SLAM0, SFEA0 
+0.002500     	             ! CF 
+-0.050000     	 	         ! ELSM 
+0.000000   	                 ! CORI 
+TIDE_DATA 
+90                                       ! ANGINN - MINIMUM ANGLE FOR TANGENTIAL FLOW
+0 0.000000 0.000000 0                    ! NOUTE, TOUTSE, TOUTFE, NSPOOLE - FORT 61 OPTIONS
+0                                        ! NSTAE - NUMBER OF ELEVATION RECORDING STATIONS, FOLLOWED BY LOCATIONS ON PROCEEDING LINES
+0 0.000000 0.000000 0                    ! NOUTV, TOUTSV, TOUTFV, NSPOOLV - FORT 62 OPTIONS
+0                                        ! NSTAV - NUMBER OF VELOCITY RECORDING STATIONS, FOLLOWED BY LOCATIONS ON PROCEEDING LINES
+0 0.000000 0.000000 0                    ! NOUTM, TOUTSM, TOUTFM, NSPOOLM - METEOROLOCIAL OUTPUT INFO
+0                                        ! NSTAM - NUMBER OF METEOROLOGICAL RECORDING STATIONS, FOLLOWED BY LOCATIONS ON PROCEEDING LINES
+-3 0.000000 100.000000 1800               ! NOUTGE, TOUTSGE, TOUTFGE, NSPOOLGE - GLOBAL ELEVATION OUTPUT INFO (UNIT 63)
+-3 0.000000 100.000000 1800               ! NOUTGV, TOUTSGV, TOUTFGV, NSPOOLGV - GLOBAL VELOCITY OUTPUT INFO (UNIT 64)
+-3 0.000000 100.000000 1800               ! NOUTGM,TOUTSGM,TOUTFGM,NSPOOLGM  - GLOBAL METEOROLOGICAL OUTPUT INFO (UNIT 73/74)
+0                                        ! NHARF - NUMBER OF FREQENCIES IN HARMONIC ANALYSIS
+0.000000 0.000000 0 0.000000             ! THAS,THAF,NHAINC,FMV - HARMONIC ANALYSIS PARAMETERS
+0 0 0 0                                  ! NHASE,NHASV,NHAGE,NHAGV - CONTROL HARMONIC ANALYSIS AND OUTPUT TO UNITS 51,52,53,54
+0 1800                                   ! NHSTAR,NHSINC - HOT START FILE GENERATION PARAMETERS
+0 0 1e-010 50                            ! ITITER, ISLDIA, CONVCR, ITMAX - ALGEBRAIC SOLUTION PARAMETERS
+&timebathycontrol  !nddt, btiminc, bchgtiminc -- bathymetry time records (in seconds) and transition time
+    nddt = 0
+    btiminc = 0
+    bchgtiminc = 43200
+/
+&metcontrol
+     winddraglimit=   2.0000000000000000e-003 ,
+     draglawstring='garratt',
+     rhoair=   1.1499999999999999
+     invertedBarometerOnElevationBoundary= f 
+/
+&swanoutputcontrol
+ swan_outpuths=t,
+ swan_outputdir=t,
+ swan_outputtm01=f,
+ swan_outputtps=t,
+ swan_outputwind=f,
+ swan_outputtm02=t,
+ swan_outputtmm10=f,
+/
+
